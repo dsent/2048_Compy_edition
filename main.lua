@@ -15,12 +15,18 @@ function love.update(dt)
   end
 end
 
+-- Only the left button plays; a right click does nothing.
+
 function love.mousepressed(x, y, button, istouch, presses)
-  controls_click(x, y)
+  if button == 1 then
+    controls_click(x, y)
+  end
 end
 
 function love.mousereleased(x, y, button, istouch, presses)
-  pointer_end(x, y)
+  if button == 1 then
+    pointer_end(x, y)
+  end
 end
 
 function love.draw()
