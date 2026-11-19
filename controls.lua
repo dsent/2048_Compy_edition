@@ -33,8 +33,11 @@ KeyPress.a = KeyPress.left
 KeyPress.d = KeyPress.right
 KeyPress.w = KeyPress.up
 KeyPress.s = KeyPress.down
-KeyPress.escape = love.event.quit
 KeyPress.r = game_reset
+
+-- Bare Esc leaves the game, once per press.
+compy.input.shortcuts.keypressed.escape = compy.input.fn.
+    stop_here(compy.input.fn.ignore_repeat(stop))
 
 
 function pointer_begin(x, y)

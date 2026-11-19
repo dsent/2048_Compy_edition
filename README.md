@@ -30,25 +30,17 @@ The project is split into several short files for readability and pedagogy (like
 
 * **Arrow keys** or **W/A/S/D** — move
 * **R** — restart
-* **Esc** — quit
+* **Esc** (alone) or **Ctrl+Q** — leave for the console
 
-See the handler in `love.keypressed`: a simple key map with unified move logic.
+Bare `Esc` leaves once per press through
+`compy.input.shortcuts.keypressed.escape` calling `stop()`. Movement and
+restart run through `KeyPress` in `controls.lua` and `love.keypressed` in
+`main.lua`:
 
 ```lua
--- main.lua (fragment)
-function love.keypressed(key)
-  if key == "escape" then love.event.quit() end
-  local map = {
-    left="left", right="right", up="up", down="down",
-    a="left", d="right", w="up", s="down",
-  }
-  local dir = map[key]
-  if dir then
-    if board:move(dir) then board:add_random_tile() end
-  elseif key == "r" then
-    board:reset()
-  end
-end
+-- controls.lua (leaving)
+compy.input.shortcuts.keypressed.escape = compy.input.fn.
+    stop_here(compy.input.fn.ignore_repeat(stop))
 ```
 
 ---
